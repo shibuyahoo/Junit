@@ -23,7 +23,9 @@ import static org.mockito.Mockito.*;
 public class ToDoServiceTest {
 
     @Mock
-    private ToDoRepository toDoRepository;
+    private ToDoRepository toDoRepository; //proxy class
+
+    //@Spy -- spy will a substitute for the actual classes while running class
 
     @InjectMocks
     private ToDoServiceImpl toDoService;
