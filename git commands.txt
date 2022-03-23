@@ -1,0 +1,10 @@
+git clone URL (To clone URL to local system)
+git checkout <branchname> to switch to a branchname
+git pull (to fetch latest changes)
+git commit -m message
+git push
+
+once git is installed and you have added it to path
+git gui (to invoke graphical user interface)
+verify changes in GUI
+Stage changescommit and push (to update ur changes)
