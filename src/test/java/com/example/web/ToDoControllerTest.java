@@ -43,7 +43,7 @@ public class ToDoControllerTest {
     @Test
     public void verifyToDoById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/todo/3").accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").exists())
+             .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.text").exists())
                 .andExpect(jsonPath("$.completed").exists())
                 .andExpect(jsonPath("$.id").value(3))
@@ -106,6 +106,8 @@ public class ToDoControllerTest {
                 .andExpect(jsonPath("$.completed").value(false))
                 .andDo(print());
     }
+    
+
 
     @Test
     public void verifyMalformedSaveToDo() throws Exception {
@@ -118,6 +120,16 @@ public class ToDoControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void verifySaveToDoWithInvalidId() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/todo/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{ \"id\": \"-18\", \"text\" : \"New ToDo Sample\", \"completed\" : \"false\" }")
+                .accept(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.errorCode").value(404))
+        .andExpect(jsonPath("$.message").value("Payload malformed, id must not be defined"))
+                .andDo(print());
+    }
     @Test
     public void verifyUpdateToDo() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.patch("/todo/")
@@ -137,7 +149,7 @@ public class ToDoControllerTest {
     public void verifyInvalidToDoUpdate() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.patch("/todo/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"idd\": \"8\", \"text\" : \"New ToDo Sample\", \"completed\" : \"false\" }")
+                .content("{ \"id\": \"8\", \"text\" : \"New ToDo Sample\", \"completed\" : \"false\" }")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorCode").value(404))
                 .andExpect(jsonPath("$.message").value("Entity not found"))

@@ -62,9 +62,12 @@ public class ToDoController {
     @RequestMapping(value = "/todo", method = RequestMethod.PATCH)
     public ResponseEntity<ToDo> updateToDo(@RequestBody ToDo payload) throws ToDoException {
         logger.info("Payload to update " + payload);
+       /* if (!PayloadValidator.validateCreatePayload(payload)) {
+            throw new ToDoException("Payload malformed, invalid Id provided");
+        }*/
         ToDo toDo = toDoService.getToDoById(payload.getId());
         if (toDo == null || toDo.getId() <= 0) {
-            throw new ToDoException("ToDo to update doesn´t exist");
+            throw new ToDoException("ToDo to update doesn't exist");
         }
         return new ResponseEntity<>(toDoService.saveToDo(payload), HttpStatus.OK);
     }

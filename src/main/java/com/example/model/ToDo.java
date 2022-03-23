@@ -57,4 +57,10 @@ public class ToDo {
     }
 
 
+	@Override
+	public String toString() {
+		return "ToDo [id=" + id + ", text=" + text + ", completed=" + completed + "]";
+	}
+
+
 }
