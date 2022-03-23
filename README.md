@@ -6,4 +6,5 @@
 4. Go to the target folder
 5. java -jar demo-0.0.1-SNAPSHOT.jar
 6. Verify your RESTful calls.
+7. The scope of our session was to understand Junit Test
 
